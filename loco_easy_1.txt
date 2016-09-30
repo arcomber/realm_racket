@@ -1,0 +1,22 @@
+#lang racket
+(require 2htdp/universe 2htdp/image)
+
+(define LOCO-IMAGE <loc-image-here>)
+
+(define WIDTH 800)
+(define HEIGHT 200)
+
+(define (add-3-to-state current-state)
+  (+ current-state 3))
+
+(define (draw-a-ufo-onto-an-empty-scene current-state)
+  (place-image LOCO-IMAGE current-state (/ HEIGHT 2)
+               (empty-scene WIDTH HEIGHT)))
+
+(define (right-most-point current-state)
+  (>= current-state 750))
+
+(big-bang 50 
+          (on-tick add-3-to-state)
+          (to-draw draw-a-ufo-onto-an-empty-scene)
+          (stop-when right-most-point))
